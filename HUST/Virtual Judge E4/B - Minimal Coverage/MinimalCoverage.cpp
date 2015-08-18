@@ -5,7 +5,7 @@
 #define MAX_SEGMENT_NUM 99999
 
 typedef struct LineRecord {
-	int start, end;
+    int start, end;
 } Line;
 
 void solveE4aMinimalCoverage();
@@ -13,8 +13,8 @@ int inputSchedule(Line line[]);
 int cmp(const void *a, const void *b);
 
 int main() {
-	solveE4aMinimalCoverage();
-	return 0;
+    solveE4aMinimalCoverage();
+    return 0;
 }
 
 
@@ -23,13 +23,13 @@ void solveE4aMinimalCoverage() {
     int m;
     scanf("%d", &m);
 
-	int n = inputSchedule(line);
-	qsort(line, n, sizeof(Line), cmp);
+    int n = inputSchedule(line);
+    qsort(line, n, sizeof(Line), cmp);
 
     int lastStart = 0, lastEnd = m, cnt = 0;
     int candLineId = 0, candLineEnd = -1;
     int selection[MAX_SEGMENT_NUM];
-	for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) {
         if (line[i].start <= lastStart) {
             if (line[i].end > candLineEnd) {
                 candLineEnd = line[i].end;
@@ -54,7 +54,7 @@ void solveE4aMinimalCoverage() {
                 }
             }
         }
-	}
+    }
 
     if (candLineEnd < m) {
         printf("No solution\n");
@@ -67,7 +67,7 @@ void solveE4aMinimalCoverage() {
 }
 
 int inputSchedule(Line line[]) {
-	int n = 0, start, end;
+    int n = 0, start, end;
 
     scanf("%d %d", &start, &end);
     while (start != 0 || end != 0) {
@@ -76,13 +76,13 @@ int inputSchedule(Line line[]) {
         ++n;
         scanf("%d %d", &start, &end);
     }
-	return n;
+    return n;
 }
 
 int cmp(const void *a, const void *b) {
-	if ((*(Line *)a).start != (*(Line *)b).start) {
+    if ((*(Line *)a).start != (*(Line *)b).start) {
         return (*(Line *)a).start - (*(Line *)b).start;
-	} else {
+    } else {
         return (*(Line *)b).end - (*(Line *)a).end;
-	}
+    }
 }
