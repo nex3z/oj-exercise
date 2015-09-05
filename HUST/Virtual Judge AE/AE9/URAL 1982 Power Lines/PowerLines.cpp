@@ -10,48 +10,48 @@ void solveE7A_PowerLines();
 void inputCost(Cost cost, int n);
 
 int main() {
-	solveE7A_PowerLines();
+    solveE7A_PowerLines();
 }
 
 unsigned char poweredCityId[MAX_N];
 bool isPowered[MAX_N];
 Cost cost;
 void solveE7A_PowerLines() {
-	int n, k;
-	scanf("%d %d", &n, &k);
+    int n, k;
+    scanf("%d %d", &n, &k);
 
-	for (int i = 1; i <= k; ++i) {
-		scanf("%d ", &poweredCityId[i]);
-		isPowered[poweredCityId[i]] = true;
-	}
+    for (int i = 1; i <= k; ++i) {
+        scanf("%d ", &poweredCityId[i]);
+        isPowered[poweredCityId[i]] = true;
+    }
 
-	inputCost(cost, n);
+    inputCost(cost, n);
 
-	int totalCost = 0;
-	while (k < n) {
-		int minCost = MAX_COST, minCostId = 0;
-		for (int j = 1; j <= n; ++j) {
-			if (!isPowered[j]) {
-				for (int l = 1; l <= k; ++l) {
-					if (cost[j][poweredCityId[l]] < minCost) {
-						minCost = cost[j][poweredCityId[l]];
-						minCostId = j;
-					}
-				}
-			}
-		}
-		totalCost += minCost;
-		poweredCityId[++k] = minCostId;
-		isPowered[minCostId] = true;
-	}
+    int totalCost = 0;
+    while (k < n) {
+        int minCost = MAX_COST, minCostId = 0;
+        for (int j = 1; j <= n; ++j) {
+            if (!isPowered[j]) {
+                for (int l = 1; l <= k; ++l) {
+                    if (cost[j][poweredCityId[l]] < minCost) {
+                        minCost = cost[j][poweredCityId[l]];
+                        minCostId = j;
+                    }
+                }
+            }
+        }
+        totalCost += minCost;
+        poweredCityId[++k] = minCostId;
+        isPowered[minCostId] = true;
+    }
 
-	printf("%d\n", totalCost);
-}	
+    printf("%d\n", totalCost);
+}    
 
 void inputCost(Cost cost, int n) {
-	for (int i = 1; i <= n; ++i) {
-		for (int j = 1; j <= n; ++j) {
-			scanf("%d", &cost[i][j]);
-		}
-	}
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= n; ++j) {
+            scanf("%d", &cost[i][j]);
+        }
+    }
 }
