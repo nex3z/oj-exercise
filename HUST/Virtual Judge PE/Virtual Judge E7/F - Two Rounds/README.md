@@ -1,0 +1,1 @@
+http://acm.timus.ru/problem.aspx?num=1156&locale=en
