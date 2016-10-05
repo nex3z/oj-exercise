@@ -8,29 +8,28 @@ typedef struct LineRecord {
     int start, end;
 } Line;
 
-void solveE4aMinimalCoverage();
+void solveE4bMinimalCoverage();
 int inputSchedule(Line line[]);
 int cmp(const void *a, const void *b);
 
 int main() {
-    solveE4aMinimalCoverage();
+    solveE4bMinimalCoverage();
     return 0;
 }
 
 
 Line line[MAX_SEGMENT_NUM];
-void solveE4aMinimalCoverage() {
+void solveE4bMinimalCoverage() {
     int m;
     scanf("%d", &m);
 
     int n = inputSchedule(line);
     qsort(line, n, sizeof(Line), cmp);
 
-    int lastStart = 0, lastEnd = m, cnt = 0;
-    int candLineId = 0, candLineEnd = -1;
+    int lastEnd = 0, cnt = 0, candLineId = 0, candLineEnd = -1;
     int selection[MAX_SEGMENT_NUM];
     for (int i = 0; i < n; ++i) {
-        if (line[i].start <= lastStart) {
+        if (line[i].start <= lastEnd) {
             if (line[i].end > candLineEnd) {
                 candLineEnd = line[i].end;
                 candLineId = i;
@@ -40,10 +39,10 @@ void solveE4aMinimalCoverage() {
                 }
             }
         } else {
-            lastStart = candLineEnd;
+            lastEnd = candLineEnd;
             selection[cnt++] = candLineId;
 
-            if (line[i].start <= lastStart) {
+            if (line[i].start <= lastEnd) {
                 if (line[i].end > candLineEnd) {
                     candLineEnd = line[i].end;
                     candLineId = i;
